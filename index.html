@@ -10,6 +10,7 @@
         width: 200px;
         height: 56px;
         text-align: center;
+        font-size: 16px;
       }
     </style>
   </head>
@@ -27,9 +28,12 @@
           if ( i == e.bookmarks.length -1 || b.text.toLowerCase().indexOf('esittely') > -1 ) return;
           var el = document.createElement('a');
           el.href = b.href;
-          el.append( document.createTextNode(b.text.replace(/[\.\,]$/,'')) );
+          var text = b.text.replace(/\s*$/,'').replace(/[\.\,]$/,'');
+          el.append( document.createTextNode(text));
           el.title = b.time + ': ' + e.title;
           el.target = '_blank';
+          if ( text.length > 60 ) el.style.fontSize = '80%';
+          if ( text.length > 100 ) el.style.fontSize = '65%';
           links.push(Object.assign({},b,{title:e.title,node:el}))
         } ) )
 
